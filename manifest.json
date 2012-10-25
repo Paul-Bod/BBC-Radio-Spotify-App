@@ -1,0 +1,19 @@
+{
+	"BundleType": "Application",
+	"BundleIdentifier": "tutorial",
+	"AppIcon": {
+		"36x18": "tutorial.png"
+	},
+	"AppName": {
+		"en": "Tutorial"
+	},
+	"SupportedLanguages": [
+		"en"
+	],
+	"RequiredPermissions": [
+		"http://ws.audioscrobbler.com",
+    "http://www.bbc.co.uk/radio/player/bbc_radio_one/realtime",
+    "http://ws.spotify.com/search/1/artist",
+    " http://developer.echonest.com/api/v4/artist/similar"
+	]
+}

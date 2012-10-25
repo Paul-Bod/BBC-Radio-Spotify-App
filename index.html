@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>My First App</title>
+	<link rel="stylesheet" href="sp://import/css/adam.css">
+	<link rel="stylesheet" href="tutorial.css">
+  <script src="require.js"></script>
+
+  <script>
+    require(['tutorial'], function (Tutorial) {
+      Tutorial.init();
+    });
+  </script>
+
+  
+</head>
+<body>
+<script>
+    /*function pollingCallback (data) {
+
+        tutorial.renderOnAirNowData(data);
+        console.log($);
+    }*/
+  </script>
+<h1 id="header">BBC Radio 1!</h1>
+<div id="oan">
+<h3>Now Playing</h3>
+</div>
+<br/>
+<h3>Related Artists</h3>
+<div id="related"></div>
+</body>
+</html>
