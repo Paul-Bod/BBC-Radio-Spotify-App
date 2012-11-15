@@ -5,27 +5,32 @@
 	<title>My First App</title>
 	<link rel="stylesheet" href="sp://import/css/adam.css">
 	<link rel="stylesheet" href="tutorial.css">
-  <script src="require.js"></script>
+    <script src="require.js"></script>
 
-  <script>
-    require(['tutorial'], function (Tutorial) {
-      Tutorial.init();
-    });
-  </script>
-
-  
+    <script>
+        require(['Controller'], function (Controller) {
+          Controller.init();
+        });
+    </script>
 </head>
 <body>
-<script>
-    /*function pollingCallback (data) {
+<h1 id="header">BBC Radio on Spotify!</h1>
 
-        tutorial.renderOnAirNowData(data);
-        console.log($);
-    }*/
-  </script>
-<h1 id="header">BBC Radio 1!</h1>
-<div id="oan">
+<select id='station-switcher'>
+    <option value='bbc_radio_one'>BBC Radio 1</option>
+    <option value='bbc_radio_two'>BBC Radio 2</option>
+    <option value='bbc_1xtra'>BBC 1Xtra</option>
+    <option value='bbc_6music'>BBC 6 Music</option>
+</select>
+
 <h3>Now Playing</h3>
+<div id="oan-track">
+</div>
+<div id="oan-image">
+</div>
+<div id="oan-reviews">
+</div>
+<div id="oan-clips">
 </div>
 <br/>
 <h3>Related Artists</h3>

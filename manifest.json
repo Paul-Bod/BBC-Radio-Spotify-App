@@ -1,19 +1,21 @@
 {
 	"BundleType": "Application",
-	"BundleIdentifier": "tutorial",
+	"BundleIdentifier": "bbcradio",
 	"AppIcon": {
 		"36x18": "tutorial.png"
 	},
 	"AppName": {
-		"en": "Tutorial"
+		"en": "BBC Radio"
 	},
 	"SupportedLanguages": [
 		"en"
 	],
 	"RequiredPermissions": [
+        "http://*",
 		"http://ws.audioscrobbler.com",
     "http://www.bbc.co.uk/radio/player/bbc_radio_one/realtime",
     "http://ws.spotify.com/search/1/artist",
-    " http://developer.echonest.com/api/v4/artist/similar"
+    " http://developer.echonest.com/api/v4/artist/similar",
+    "http://ichef.bbci.co.uk/"
 	]
 }
