@@ -5,7 +5,7 @@ define(['jquery'], function ($) {
     function renderArtistImage (src) {
 
         var image = "<img src='" + src + "'/>";
-        $('#oan-image').html(image);
+        $('#oan-track').prepend(image);
     }
 
     function renderArtistReleaseReviews (artistReviews, artistName) {
@@ -15,7 +15,7 @@ define(['jquery'], function ($) {
         if (artistReviews.length > 0) {
 
             var aggregatedReviews = '',
-                number = artistReviews.length > 3 ? 3 : artistReviews.length,
+                number = artistReviews.length > 1 ? 1 : artistReviews.length,
                 releaseTitle,
                 releaseImage,
                 releaseReview,
@@ -30,7 +30,7 @@ define(['jquery'], function ($) {
                 aggregatedReviews += '<td>' + releaseImage + releaseTitle + releaseReview + '</td>';
             }
 
-            reviewContent = '<b>Albums by ' + artistName + ':</b><table><tr>' + aggregatedReviews + '</tr></table>';
+            reviewContent = '<b>Latest releases:</b><table><tr>' + aggregatedReviews + '</tr></table>';
 
             $('#oan-reviews').html(reviewContent);
         }
@@ -38,7 +38,7 @@ define(['jquery'], function ($) {
 
     exports.renderOnAirNowData = function (artist, track) {
 
-        var content = '<b>' + artist + '</b> - ' + track;
+        var content = '<p><b>' + artist + '</b></p> - ' + track;
         $('#oan-track').html(content);
     };
 
@@ -62,7 +62,7 @@ define(['jquery'], function ($) {
                 brand,
                 brandUrl,
                 aggregatedClips = '',
-                number = clips.length > 3 ? 3 : clips.length,
+                number = clips.length > 1 ? 1 : clips.length,
                 clipsContent;
 
             for (var i = 0; i < number; i++) {
@@ -75,7 +75,7 @@ define(['jquery'], function ($) {
                 if (clips[i]['brand']) {
                     brand = clips[i]['brand']['title'];
                     brandUrl = clips[i]['brand']['url'];
-                    aggregatedClips += clipInfo + " on <b><a href='" + brandUrl + "'>" + brand + "</a></b>";
+                    aggregatedClips += clipInfo + " from <b><a href='" + brandUrl + "'>" + brand + "</a></b>";
                 }
                 else {
 
@@ -85,7 +85,7 @@ define(['jquery'], function ($) {
             }
 
 
-            clipsContent = '<b>' + data['artistName'] + ' on the BBC:</b><table><tr>' + aggregatedClips + '</tr></table>';
+            clipsContent = '<b>Latest clips:</b><table><tr>' + aggregatedClips + '</tr></table>';
             $('#oan-clips').html(clipsContent);
             
         }

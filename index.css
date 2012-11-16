@@ -1,0 +1,83 @@
+h1 {
+	text-align: center;
+	font-size: 24px;
+	padding: 20px;
+}
+
+.bbc-radio {
+
+    position:absolute;
+}
+
+.oan-container {
+
+    position: relative;
+    border: 3px solid white;
+    height: 559px;
+    width: 603px;
+}
+
+.oan-container #oan-track {
+
+    position: relative;
+    float: left;
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+    height: 250px;
+    width: 250px;
+}
+
+.oan-container #oan-track img {
+    margin: 8px;
+}
+
+.oan-container #oan-chart-uk {
+
+    position: relative;
+    float: left;
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+    height: 150px;
+    width: 250px;
+}
+
+.oan-container #oan-chart-bbc {
+
+    position: relative;
+    float: left;
+    border-right: 3px solid white;
+    height: 150px;
+    width: 250px;
+}
+
+.oan-container #oan-info {
+
+    position: relative;
+    float: left;
+    border-bottom: 3px solid white;
+    height: 250px;
+    width: 350px;
+}
+
+.oan-container #oan-reviews {
+
+    position: relative;
+    float: left;
+    border-bottom: 3px solid white;
+    height: 150px;
+    width: 350px;
+}
+
+.oan-container #oan-clips {
+
+    position: relative;
+    float: left;
+    height: 150px;
+    width: 350px;
+}
+
+#related {
+
+    position: relative;
+    float: left
+}

@@ -22,6 +22,8 @@ define(function () {
             normalizedData['track'] = onAirNow.find('#track').html().trim();
             normalizedData['musicBrainzId'] = musicBrainzId;
 
+            console.log(musicBrainzId);
+
         return normalizedData;
     };
 
