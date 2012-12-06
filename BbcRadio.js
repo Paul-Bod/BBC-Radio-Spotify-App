@@ -66,7 +66,7 @@ define(function () {
 
         var normalizedData = {};
 
-        if (data.count > 0) {
+        if (data.length > 0) {
 
             normalizedData['position'] = data['position'];
             normalizedData['lastweek'] = data['lastweek'];
