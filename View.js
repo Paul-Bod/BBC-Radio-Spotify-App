@@ -121,6 +121,7 @@ define(['jquery'], function ($) {
 
     exports.renderTrackChartData = function (data) {
 
+        console.log('chart', data['nochartposition']);
         if (data['nochartposition']) {
             $('#oan-chart-uk').html(data['nochartposition']);
             return true;
