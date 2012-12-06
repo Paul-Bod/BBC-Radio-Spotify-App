@@ -11,7 +11,7 @@ define(['jquery'], function ($) {
 
     function normalizeArtistResults (data) {
 
-
+        console.log(data[0].uri.split(":")[2]);
         return data[0].uri.split(":")[2];
     }
 
@@ -34,19 +34,19 @@ define(['jquery'], function ($) {
     exports.searchForArtist = function (artist, callback) {
 
 
-        var search = new models.Search(artist);
+        var search2 = new models.Search(""+artist);
 
-        search.searchPlaylists=false;
-        search.searchAlbums=false;
-        search.searchTrack=false;
+        search2.searchPlaylists=false;
+        search2.searchAlbums=false;
+        search2.searchTrack=false;
 
 
-        search.observe(models.EVENT.CHANGE, function() {
-       
-            callback(normalizeArtistResults(search.artists));
+        search2.observe(models.EVENT.CHANGE, function() {
+            
+            callback(normalizeArtistResults(search2.artists));
         });
 
-        search.appendNext();
+        search2.appendNext();
 
     }
 
