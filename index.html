@@ -14,7 +14,11 @@
     </script>
 </head>
 <body>
-<h1 id="header">BBC Radio on Spotify!</h1>
+    <div class="header">
+        <p class="pinkColor" >BBC Radio on Spotify!</p>
+    </div>
+<div class="content">
+    <div class="station-switcher-div">
 
 <select id='station-switcher'>
     <option value='bbc_radio_one'>BBC Radio 1</option>
@@ -22,37 +26,41 @@
     <option value='bbc_1xtra'>BBC 1Xtra</option>
     <option value='bbc_6music'>BBC 6 Music</option>
 </select>
+</div>
 
-<h3>Now Playing</h3>
-
-<div class='bbc-radio'>
-    <div class='oan-container'>
-        <div id="oan-track">
+<div >
+    <div>
+        <div id="oan-track" class="boxRound left">
         </div>
 
-        <div id='oan-bio'>
-            <p>Here is some example information on this artist!</p>
+        <div id='oan-bio' class="boxRound right">
+
+        </div>
+    </div>
+    <div>
+        <div id='oan-chart-uk' class="boxRound left">
+
         </div>
 
-        <div id='oan-chart-uk'>
-            <p>UK chart</p>
-        </div>
-
-        <div id="oan-reviews">
+        <div id="oan-reviews" class="boxRound right">
             <p>Reviews</p>
         </div>
-
-        <div id='oan-chart-bbc'>
-            <p>BBC chart</p>
+    </div>
+    <div>
+        <div id='oan-chart-bbc' class="boxRound left">
+            <h3>Related Artists</h3>
+            <div id="related"></div>
         </div>
 
-        <div id="oan-clips">
+        <div id="oan-clips" class="boxRound right">
             <p>Clips</p>
         </div>
     </div>
-
-    <h3>Related Artists</h3>
-    <div id="related"></div>
+ </div>
+<div class="footer">
+    Rigths and Permissions...
+</div>
+</div>
 </div>
 </body>
 </html>
