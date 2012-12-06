@@ -1,56 +1,53 @@
 define(['jquery'], function ($) {
 
     var exports = {};
+     var sp = getSpotifyApi(1),
+        models = sp.require('sp://import/scripts/api/models');
 
     function normalizeTrackResults (data) {
 
-        var results = $(data),
-            spotifyTrackCode = results.find('track').attr('href');
-            //track = new models.Track(spotifyTrackCode);
-
-        //console.log(results.find('opensearch:totalResults').html());
-
-        return spotifyTrackCode;
+        return data[0];
     }
 
     function normalizeArtistResults (data) {
 
-        var results = $(data),
-            spotifyArtistCode = results.find('artist').attr('href').split(':')[2];
 
-        return spotifyArtistCode;
+        return data[0].uri.split(":")[2];
     }
 
     exports.searchForTrack = function (artist, track, callback) {
 
-        artist = artist.replace(" ", "%20");
-        track = track.replace(" ", "%20");
+        var searchTerm = track + " "+artist,
+            search = new models.Search(searchTerm);
 
-        var searchTerm = artist + "%20" + track;
+        search.searchPlaylists=false;
+        search.searchAlbums=false;
+        search.searchArtist=false;
 
-        $.ajax({
-          url : "http://ws.spotify.com/search/1/track?q=" + searchTerm,
-          dataType: 'xml',
-          success : function (data) {
-
-            callback(normalizeTrackResults(data));
-          }
+        search.observe(models.EVENT.CHANGE, function() {
+            callback(normalizeTrackResults(search.tracks));
         });
 
+        search.appendNext();
     }
 
     exports.searchForArtist = function (artist, callback) {
 
-        artist = artist.replace(" ", "%20");
 
-        $.ajax({
-          url : "http://ws.spotify.com/search/1/artist?q=" + artist,
-          dataType: 'xml',
-          success : function (data) {
+        var search = new models.Search(artist);
 
-            callback(normalizeArtistResults(data));
-          }
+        search.searchPlaylists=false;
+        search.searchAlbums=false;
+        search.searchTrack=false;
+
+
+        search.observe(models.EVENT.CHANGE, function() {
+       
+            callback(normalizeArtistResults(search.artists));
         });
+
+        search.appendNext();
+
     }
 
     return exports;
