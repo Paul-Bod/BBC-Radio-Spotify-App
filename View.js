@@ -53,7 +53,6 @@ define(['jquery'], function ($) {
         renderArtistImage(data['image']);
         renderArtistReleaseReviews(data['reviews'], data['name']);
 
-        console.log(data['bio']);
         renderArtistBio(data['bio']);
     };
 
@@ -100,15 +99,24 @@ define(['jquery'], function ($) {
         }
     };
 
-    exports.renderRelatedArtists = function (artists) {
+    exports.renderRelatedArtists = function (artists, clickHandler) {
 
-        var relatedArtists = '';
+        var relatedArtists = '',
+            id = ''
 
-        for (var index in artists) {
-            relatedArtists += artists[index]['name'] + "<br/>";
+        $('#related').empty();
+
+        for (var index=0; index<4; index++) {
+            id = artists[index]['name'] + "%" + artists[index]['track'] + "%" + artists[index]['musicbrainzid']+"%";
+
+            relatedArtists = $('<div id="' + id + '"></div>');
+            relatedArtists.html(artists[index]['name'] + "<br/>" + artists[index]['track']);
+            relatedArtists.click(function (e) { clickHandler(e) });
+
+            $('#related').append(relatedArtists);
+            $('#related').append('<br/><br/>');
         }
 
-        $('#related').html(relatedArtists);
     };
 
     exports.renderTrackChartData = function (data) {

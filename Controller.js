@@ -4,8 +4,9 @@ define([
     'StationSwitcher',
     'BbcRadio',
     'Spotify',
-    'Echonest'
-], function ($, View, StationSwitcher, BbcRadio, Spotify, Echonest) {
+    'Echonest',
+    'Musicbrainz'
+], function ($, View, StationSwitcher, BbcRadio, Spotify, Echonest, Musicbrainz) {
 
     var sp = getSpotifyApi(1),
         models = sp.require('sp://import/scripts/api/models'),
@@ -59,10 +60,43 @@ define([
         View.renderTrackChartData(data);
     }
 
+    function handleRelatedArtistClick (e) {
+
+        var id = e.srcElement.id,
+            params=id.split("%"),
+            data = {};
+
+            data['artist'] = params[0],
+            data['track'] = params[1],
+            data['musicBrainzId'] = params[2];
+
+        handleOnAirNow(data);
+    }
+
+    function addMusicbrainzIdtoRelatedArtists (index, relatedArtists) {
+
+        Musicbrainz.getIdForArtist(relatedArtists[index].name, function (id) {
+
+            relatedArtists[index]['musicbrainzid'] = id;
+
+            if ((index+1) >= relatedArtists.length) {
+                return true;
+            }
+
+            addMusicbrainzIdtoRelatedArtists(index+1, relatedArtists)
+        });
+    }
+
     function handleArtistSearchResult (spotifyArtistCode) {
 
-        Echonest.searchForRelatedArtists(spotifyArtistCode, function (relatedArtists) {
-            View.renderRelatedArtists(relatedArtists);
+        Echonest.getRelatedArtistsData(spotifyArtistCode, function (relatedArtists) {
+
+            var id = '';
+
+            console.log(relatedArtists);
+            //addMusicbrainzIdtoRelatedArtists(0, relatedArtists);
+
+            View.renderRelatedArtists(relatedArtists, handleRelatedArtistClick);
         });
     }
 

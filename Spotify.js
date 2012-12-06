@@ -1,7 +1,7 @@
 define(['jquery'], function ($) {
 
-    var exports = {};
-     var sp = getSpotifyApi(1),
+    var exports = {},
+        sp = getSpotifyApi(1),
         models = sp.require('sp://import/scripts/api/models');
 
     function normalizeTrackResults (data) {
@@ -11,7 +11,6 @@ define(['jquery'], function ($) {
 
     function normalizeArtistResults (data) {
 
-        console.log(data[0].uri.split(":")[2]);
         return data[0].uri.split(":")[2];
     }
 
