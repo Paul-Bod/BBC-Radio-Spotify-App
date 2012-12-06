@@ -36,6 +36,12 @@ define(['jquery'], function ($) {
         }
     }
 
+    function renderArtistBio (bio) {
+        $bio = $('#oan-bio');
+        $bio.empty();
+        $bio.append(bio);
+    }
+
     exports.renderOnAirNowData = function (artist, track) {
 
         var content = '<p><b>' + artist + '</b></p> - ' + track;
@@ -46,6 +52,9 @@ define(['jquery'], function ($) {
 
         renderArtistImage(data['image']);
         renderArtistReleaseReviews(data['reviews'], data['name']);
+
+        console.log(data['bio']);
+        renderArtistBio(data['bio']);
     };
 
     exports.renderArtistClips = function (data) {
@@ -100,6 +109,20 @@ define(['jquery'], function ($) {
         }
 
         $('#related').html(relatedArtists);
+    };
+
+    exports.renderTrackChartData = function (data) {
+
+        if (data['nochartposition']) {
+            $('#oan-chart-uk').html(data['nochartposition']);
+            return true;
+        }
+
+        var trackInfo = '<b>Position:</b> ' + data['position']
+            + '<br/><b>Last Week:</b> ' + data['lastweek']
+            + '<br/><b>Weeks In Chart:</b> ' + data['weeksinchart'];
+
+        $('#oan-chart-uk').html(trackInfo);
     };
 
     return exports;

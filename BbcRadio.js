@@ -34,6 +34,9 @@ define(function () {
         normalizedData['name'] = data['artist']['name'];
         normalizedData['image'] = data['artist']['image']['src'];
         normalizedData['reviews'] = data['artist']['reviews'];
+        normalizedData['bio'] = data['artist']['wikipedia_article']['content'];
+
+        console.log(normalizedData['bio']);
 
         return normalizedData;
     }
@@ -44,6 +47,39 @@ define(function () {
 
         normalizedData['clips'] = data['artist']['clips'];
         normalizedData['artistName'] = data['artist']['name'];
+
+        return normalizedData;
+    }
+
+    function filterChartDataForTrack (data, musicBrainzId) {
+
+        var entries = data.chart.entries;
+
+        for (var index in entries) {
+
+            if (entries[index].gid === musicBrainzId) {
+
+                return entries[index];
+            }
+        }
+
+        return [];
+    }
+
+    function normalizeTrackChartData (data) {
+
+        var normalizedData = {};
+
+        if (data.count > 0) {
+
+            normalizedData['position'] = data['position'];
+            normalizedData['lastweek'] = data['lastweek'];
+            normalizedData['weeksinchart'] = data['weeksinchart'];
+        }
+        else {
+
+            normalizedData['nochartposition'] = 'This track is not in the Top 40 this week!';
+        }
 
         return normalizedData;
     }
@@ -89,6 +125,19 @@ define(function () {
         });
     }
 
+    exports.fetchTrackChartData = function (musicBrainzId, callback) {
+
+        $.ajax({
+          url : 'http://www.bbc.co.uk/radio1/chart/singles.json',
+          dataType: 'json',
+          success : function (data) {
+
+            var filteredData = filterChartDataForTrack(data, musicBrainzId);
+
+            callback(normalizeTrackChartData(filteredData));
+          }
+        });
+    }
 
     return exports;
 });

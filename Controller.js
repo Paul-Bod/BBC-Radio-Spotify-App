@@ -34,6 +34,7 @@ define([
 
         BbcRadio.fetchArtistData(data['musicBrainzId'], handleArtistData);
         BbcRadio.fetchArtistClips(data['musicBrainzId'], handleArtistClips);
+        BbcRadio.fetchTrackChartData(data['musicBrainzId'], handleTrackChartData);
         Spotify.searchForTrack(data['artist'], data['track'], handleTrackSearchResult);
         Spotify.searchForArtist(data['artist'], handleArtistSearchResult);
     }
@@ -51,6 +52,11 @@ define([
     function handleTrackSearchResult (spotifyTrackCode) {  
 
         models.player.play(spotifyTrackCode);
+    }
+
+    function handleTrackChartData (data) {
+
+        View.renderTrackChartData(data);
     }
 
     function handleArtistSearchResult (spotifyArtistCode) {
