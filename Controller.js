@@ -5,8 +5,9 @@ define([
     'BbcRadio',
     'Spotify',
     'Echonest',
-    'Musicbrainz'
-], function ($, View, StationSwitcher, BbcRadio, Spotify, Echonest, Musicbrainz) {
+    'Musicbrainz', 
+    'Votes'
+], function ($, View, StationSwitcher, BbcRadio, Spotify, Echonest, Musicbrainz, Votes) {
 
     var sp = getSpotifyApi(1),
         models = sp.require('sp://import/scripts/api/models'),
