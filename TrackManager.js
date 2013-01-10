@@ -11,17 +11,6 @@ define([
         player = models.player,
         exports = {};
 
-    exports.handleTrackData = function (data) {
-
-        View.renderOnAirNowData(data['artist'], data['track']);
-
-        BbcRadio.fetchArtistData(data['musicBrainzId'], handleArtistData);
-        BbcRadio.fetchArtistClips(data['musicBrainzId'], handleArtistClips);
-        BbcRadio.fetchTrackChartData(data['musicBrainzId'], handleTrackChartData);
-        Spotify.searchForTrack(data['artist'], data['track'], handleTrackSearchResult);
-        Spotify.searchForArtist(data['artist'], handleArtistSearchResult);
-    }
-
     function handleArtistData (data) {
 
         View.renderArtistData(data);
@@ -52,7 +41,7 @@ define([
             data['track'] = params[1],
             data['musicBrainzId'] = params[2];
 
-        handleOnAirNow(data);
+        exports.handleTrackData(data);
     }
 
     function addMusicbrainzIdtoRelatedArtists (index, relatedArtists) {
@@ -81,6 +70,22 @@ define([
             View.renderRelatedArtists(relatedArtists, handleRelatedArtistClick);
         });
     }
+
+    exports.handleTrackData = function (data) {
+
+        View.renderOnAirNowData(data['artist'], data['track']);
+
+        BbcRadio.fetchArtistData(data['musicBrainzId'], handleArtistData);
+        BbcRadio.fetchArtistClips(data['musicBrainzId'], handleArtistClips);
+        BbcRadio.fetchTrackChartData(data['musicBrainzId'], handleTrackChartData);
+        Spotify.searchForTrack(data['artist'], data['track'], handleTrackSearchResult);
+        Spotify.searchForArtist(data['artist'], handleArtistSearchResult);
+    };
+
+    exports.playNewTrackSelection = function (trackData) {
+        View.changeTab('index');
+        exports.handleTrackData(trackData);
+    };
 
     return exports;
 });

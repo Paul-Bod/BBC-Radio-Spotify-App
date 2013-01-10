@@ -9,6 +9,7 @@ define(['View', 'OnAir', 'Charts', 'Votes'], function (View, OnAir, Charts, Vote
         var args = models.application.arguments,
             selectedTab = args[0];
 
+        console.log(selectedTab);
         View.switchTabMarkup(selectedTab);
         
         switch (selectedTab) {

@@ -124,11 +124,30 @@ define(['jquery'], function ($) {
 
     };
 
+    exports.renderChartEntries = function (entries, clickHandler) {
+
+        var chartEntry = '',
+            id = '';
+
+        $('#charts-entries').empty();
+
+        for (var index=0; index<10; index++) {
+
+            id = entries[index].artist + "%" + entries[index].track + "%" + entries[index].musicBrainzId+"%";
+
+            chartEntry = $('<div id="' + id + '"></div>');
+            chartEntry.html(entries[index]['artist'] + "<br/>" + entries[index]['track']);
+            chartEntry.click(function (e) { clickHandler(e) });
+
+            $('#charts-entries').append(chartEntry);
+            $('#charts-entries').append('<br/><br/>');
+        }
+    };
+
     exports.renderTrackChartData = function (data) {
 
-        console.log('chart', data['nochartposition']);
-        if (data['nochartposition']) {
-            $('#oan-chart-uk').html(data['nochartposition']);
+        if (data.length === 0) {
+            $('#oan-chart-uk').html('Track is not in the chart this week!');
             return true;
         }
 
@@ -141,15 +160,22 @@ define(['jquery'], function ($) {
 
     exports.switchTabMarkup = function (tab) {
 
-        var current = document.getElementById(tabIds[tab]);
-            sections = document.getElementsByClassName('section');
+        var current = document.getElementById(tabIds[tab]),
+            sections = document.getElementsByClassName('section'),
+            currentId = current.getAttribute('id');
 
         for (var i=0, l = sections.length; i<l; i++){
-            if (current != sections[i]) {
+            if (currentId != sections[i].getAttribute('id')) {
                 sections[i].style.display = 'none';
             }
         }
         current.style.display = 'block';
+    };
+
+    exports.changeTab = function (tab) {
+
+        window.location='spotify:app:bbcradio:tabs:index';
+        exports.switchTabMarkup(tab);
     };
 
     return exports;

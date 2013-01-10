@@ -59,7 +59,7 @@ define(function () {
 
         for (var index in entries) {
 
-            if (entries[index].gid === musicBrainzId) {
+            if (entries[index].musicBrainzId === musicBrainzId) {
 
                 return entries[index];
             }
@@ -72,7 +72,6 @@ define(function () {
 
         var normalizedData = {};
 
-        console.log(data);
         if (data['position']) {
 
             normalizedData['position'] = data['position'];
@@ -85,6 +84,34 @@ define(function () {
         }
 
         return normalizedData;
+    }
+
+    function normalizeChartData (data) {
+
+        if (data.chart.description === '(none)') {
+            data.chart.description = '';
+        }
+
+        if (data.chart.short_name === '(none)') {
+            data.chart.short_name = '';
+        }
+
+        for (var index in data.chart.entries) {
+
+            var entry = {};
+
+            entry.artist = data.chart.entries[index].artist;
+            entry.track = data.chart.entries[index].title;
+            entry.musicBrainzId = data.chart.entries[index].gid;
+
+            entry.position = data.chart.entries[index].position;
+            entry.lastweek = data.chart.entries[index].lastweek;
+            entry.weeksinchart = data.chart.entries[index].weeksinchart;
+
+            data.chart.entries[index] = entry;
+        }
+
+        return data;
     }
 
     exports.fetchArtistData = function (musicBrainzId, callback) {
@@ -128,17 +155,23 @@ define(function () {
         });
     };
 
+    exports.fetchChartData = function (callback) {
+        $.ajax({
+            url : 'http://www.bbc.co.uk/radio1/chart/singles.json',
+            dataType: 'json',
+            success : function (data) {
+
+                callback(normalizeChartData(data));
+            }
+        });
+    };
+
     exports.fetchTrackChartData = function (musicBrainzId, callback) {
 
-        $.ajax({
-          url : 'http://www.bbc.co.uk/radio1/chart/singles.json',
-          dataType: 'json',
-          success : function (data) {
+        exports.fetchChartData(function (data) {
 
             var filteredData = filterChartDataForTrack(data, musicBrainzId);
-
-            callback(normalizeTrackChartData(filteredData));
-          }
+            callback(filteredData);
         });
     };
 
