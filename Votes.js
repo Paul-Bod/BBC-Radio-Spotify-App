@@ -83,12 +83,16 @@ define(['jquery', 'TrackManager', 'Echonest', 'View'], function ($, TrackManager
 		query.first({
 		  success: function(object) {
 		  	var trackButton;
+		  	var number;
 		  	if(object.get("song1")==spotifyId){
 		  		trackButton= $('#song1');
+		  		number = 1;
 		  	}else if(object.get("song2")==spotifyId){
 		  		trackButton= $('#song2');
+		  		number = 2;
 		  	}else if(object.get("song3")==spotifyId){
            		trackButton= $('#song3');
+           		number = 3;
            	}
            	var track= models.Track.fromURI(spotifyId);
             var data = {};
@@ -97,10 +101,18 @@ define(['jquery', 'TrackManager', 'Echonest', 'View'], function ($, TrackManager
             data['musicBrainzId'] = musicBrainzId;
             console.log("data", data);
           
-            trackButton.click(function (e) { 
-            	TrackManager.playNewTrackSelection(data); });
-
-		  		trackButton.append("<a>"+data['track']+"</a>");
+          	var trackButtonName = $("<a>"+data['track']+"</a>");
+            trackButtonName.click(function (e) { 
+            	TrackManager.playNewTrackSelection(data); 
+            });
+            trackButton.empty();
+            trackButton.append(trackButtonName);
+		  	
+		  	var trackButtonLink = $("<button> Vote </button>");
+		  	trackButtonLink.click(function (e) { 
+            	voteSong(number); 
+            });
+            trackButton.append(trackButtonLink);
 
 		   },
 		  error: function(error) {
