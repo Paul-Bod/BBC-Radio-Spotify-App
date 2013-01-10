@@ -1,10 +1,11 @@
-define(['jquery'
-], function ($) {
+define(['jquery', 'TrackManager', 'Echonest', 'View'], function ($, TrackManager, Echonest, View) {
 
-    var exports = {};
+       var exports = {},
+        sp = getSpotifyApi(1),
+        models = sp.require('sp://import/scripts/api/models');
 
     exports.init = function () {
-
+    
 		Parse.initialize("qR0ieufBeZNS8uVptjl7CVEEj2gHPZAgxxpinlw8", "xkUCDRNqpML8Z75kMjO7o8q1TZqAINdPDBaoMjKL");
 	    
 	    var QuizObject = Parse.Object.extend("QuizObject");
@@ -25,9 +26,11 @@ define(['jquery'
 		      }
 	    });
 
-	}
+	    renderQuizSongs();
 
-	exports.voteSong = function(numberSong){
+	};
+
+	function voteSong (numberSong){
 		var field = "votesForSong"+numberSong;
 		var QuizObject = Parse.Object.extend("QuizObject");
 		var query = new Parse.Query(QuizObject);
@@ -45,23 +48,66 @@ define(['jquery'
 		});
 	}
 
-	exports.renderQuizSongs = function(){
-		var field = "votesForSong"+numberSong;
+	function renderQuizSongs (){
+
 		var QuizObject = Parse.Object.extend("QuizObject");
 		var query = new Parse.Query(QuizObject);
 		query.descending("createdAt");
 
 		query.first({
 		  success: function(object) {
+
+		  	var track1= models.Track.fromURI(object.get("song1"));
 		  	
+		  	Echonest.getMusicBrainzId(track1.artists[0].uri.split(":")[2], object.get("song1"), renderSong);
+		  	
+		  	var track2= models.Track.fromURI(object.get("song2"));
+		  	Echonest.getMusicBrainzId(track2.artists[0].uri.split(":")[2], object.get("song2"), renderSong);
+
+		  	var track3= models.Track.fromURI(object.get("song3"));
+		  	Echonest.getMusicBrainzId(track2.artists[0].uri.split(":")[2], object.get("song3"), renderSong);
 		  },
+		  error: function(error) {
+		    alert("Error: " + error.code + " " + error.message);
+		  }
+		});
+
+	}
+
+	function renderSong(musicBrainzId, spotifyId){
+			
+		var QuizObject = Parse.Object.extend("QuizObject");
+		var query = new Parse.Query(QuizObject);
+		query.descending("createdAt");
+
+		query.first({
+		  success: function(object) {
+		  	var trackButton;
+		  	if(object.get("song1")==spotifyId){
+		  		trackButton= $('#song1');
+		  	}else if(object.get("song2")==spotifyId){
+		  		trackButton= $('#song2');
+		  	}else if(object.get("song3")==spotifyId){
+           		trackButton= $('#song3');
+           	}
+           	var track= models.Track.fromURI(spotifyId);
+            var data = {};
+            data['artist'] = track.artists[0].name,
+            data['track'] = track.name,
+            data['musicBrainzId'] = musicBrainzId;
+            console.log("data", data);
+          
+            trackButton.click(function (e) { 
+            	TrackManager.playNewTrackSelection(data); });
+
+		  		trackButton.append("<a>"+data['track']+"</a>");
+
+		   },
 		  error: function(error) {
 		    alert("Error: " + error.code + " " + error.message);
 		  }
 		});
 	}
 
-
-
- return exports;
+    return exports;
 });
