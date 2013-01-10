@@ -38,5 +38,19 @@ define(['jquery'], function ($) {
         });
     };
 
+    exports.getMusicBrainzId = function(spotifyArtistId, spotifyTrackId,  callback){
+
+          $.ajax({
+            url : "http://developer.echonest.com/api/v4/artist/profile?api_key=FILDTEOIK2HBORODV&id=spotify-WW:artist:"
+                + spotifyArtistId,
+
+            success : function (data) {
+                console.log(data);
+                callback(data.response.artist.id, spotifyTrackId);    
+            }
+        });
+    
+    };
+
     return exports;
 });
