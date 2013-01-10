@@ -3,7 +3,8 @@ define(['jquery'], function ($) {
     var exports = {},
         tabIds = {
             index  : 'index',
-            charts : 'charts'
+            charts : 'charts',
+            votes  : 'votes'
         };
 
     function renderArtistImage (src) {
