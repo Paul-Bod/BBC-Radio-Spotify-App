@@ -1,4 +1,4 @@
-define(['View', 'OnAir', 'Charts'], function (View, OnAir, Charts) {
+define(['View', 'OnAir', 'Charts', 'Votes'], function (View, OnAir, Charts, Votes) {
 
     var sp = getSpotifyApi(),
         models = sp.require('sp://import/scripts/api/models'),
