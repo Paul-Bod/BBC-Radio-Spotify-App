@@ -126,7 +126,7 @@ define(function () {
                 callback(normalizeOnAirNowData(data));
             }
         });
-    }
+    };
 
     exports.fetchTrackChartData = function (musicBrainzId, callback) {
 
@@ -140,7 +140,7 @@ define(function () {
             callback(normalizeTrackChartData(filteredData));
           }
         });
-    }
+    };
 
     return exports;
 });

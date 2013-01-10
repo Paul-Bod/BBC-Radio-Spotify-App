@@ -1,6 +1,10 @@
 define(['jquery'], function ($) {
 
-    var exports = {};
+    var exports = {},
+        tabIds = {
+            index  : 'index',
+            charts : 'charts'
+        };
 
     function renderArtistImage (src) {
 
@@ -132,6 +136,19 @@ define(['jquery'], function ($) {
             + '<br/><b>Weeks In Chart:</b> ' + data['weeksinchart'];
 
         $('#oan-chart-uk').html(trackInfo);
+    };
+
+    exports.switchTabMarkup = function (tab) {
+
+        var current = document.getElementById(tabIds[tab]);
+            sections = document.getElementsByClassName('section');
+
+        for (var i=0, l = sections.length; i<l; i++){
+            if (current != sections[i]) {
+                sections[i].style.display = 'none';
+            }
+        }
+        current.style.display = 'block';
     };
 
     return exports;

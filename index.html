@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="sp://import/css/adam.css">
 	<link rel="stylesheet" href="index.css">
     <script src="require.js"></script>
+    <script src='Parse.js'></script>
 
     <script>
         require(['Controller'], function (Controller) {
@@ -14,53 +15,62 @@
     </script>
 </head>
 <body>
-    <div class="header">
-        <p class="pinkColor" >BBC Radio on Spotify!</p>
-    </div>
-<div class="content">
-    <div class="station-switcher-div">
 
-<select id='station-switcher'>
-    <option value='bbc_radio_one'>BBC Radio 1</option>
-    <option value='bbc_radio_two'>BBC Radio 2</option>
-    <option value='bbc_1xtra'>BBC 1Xtra</option>
-    <option value='bbc_6music'>BBC 6 Music</option>
-</select>
+<div class="header">
+    <p class="pinkColor" >BBC Radio on Spotify!</p>
 </div>
 
-<div >
-    <div>
-        <div id="oan-track" class="boxRound left">
+<div id='index' class='section'>
+    <div class="content">
+        <div class="station-switcher-div">
+            <select id='station-switcher'>
+                <option value='bbc_radio_one'>BBC Radio 1</option>
+                <option value='bbc_radio_two'>BBC Radio 2</option>
+                <option value='bbc_1xtra'>BBC 1Xtra</option>
+                <option value='bbc_6music'>BBC 6 Music</option>
+            </select>
         </div>
 
-        <div id='oan-bio' class="boxRound right">
+        <div>
+            <div>
+                <div id="oan-track" class="boxRound left">
+                </div>
 
+                <div id='oan-bio' class="boxRound right">
+                </div>
+            </div>
+            <div>
+                <div id='oan-chart-uk' class="boxRound left">
+                </div>
+
+                <div id="oan-reviews" class="boxRound right">
+                    <p>Reviews</p>
+                </div>
+            </div>
+            <div>
+                <div id='oan-chart-bbc' class="boxRound left">
+                    <h3>Related Artists</h3>
+                    <div id="related"></div>
+                </div>
+
+                <div id="oan-clips" class="boxRound right">
+                    <p>Clips</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            Rigths and Permissions...
         </div>
     </div>
-    <div>
-        <div id='oan-chart-uk' class="boxRound left">
-
-        </div>
-
-        <div id="oan-reviews" class="boxRound right">
-            <p>Reviews</p>
-        </div>
-    </div>
-    <div>
-        <div id='oan-chart-bbc' class="boxRound left">
-            <h3>Related Artists</h3>
-            <div id="related"></div>
-        </div>
-
-        <div id="oan-clips" class="boxRound right">
-            <p>Clips</p>
-        </div>
-    </div>
- </div>
-<div class="footer">
-    Rigths and Permissions...
 </div>
+
+<div id='charts' class='section'>
+    <p>Charts</p>
 </div>
+
+<div id='votes' class='section'>
+    <p>Votes!</p>
 </div>
+
 </body>
 </html>

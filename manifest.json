@@ -10,12 +10,33 @@
 	"SupportedLanguages": [
 		"en"
 	],
+    "DefaultTabs": [
+		{
+			"arguments": "index",
+			"title": {
+				"en": "Live"
+			}
+		},
+		{
+			"arguments": "charts",
+			"title": {
+				"en": "Charts"
+			}
+        },
+        {
+            "arguments": "votes",
+            "title": {
+                "en": "Votes"
+        }
+    } 
+	],
 	"RequiredPermissions": [
         "http://*",
 		"http://ws.audioscrobbler.com",
-    "http://www.bbc.co.uk/radio/player/bbc_radio_one/realtime",
-    "http://ws.spotify.com/search/1/artist",
-    " http://developer.echonest.com/api/v4/artist/similar",
-    "http://ichef.bbci.co.uk/"
+        "http://www.bbc.co.uk/radio/player/bbc_radio_one/realtime",
+        "http://ws.spotify.com/search/1/artist",
+        "http://developer.echonest.com/api/v4/artist/similar",
+        "http://ichef.bbci.co.uk/",
+        "https://api.parse.com/*"
 	]
 }
