@@ -39,7 +39,9 @@ define(['jquery', 'TrackManager', 'Echonest', 'View'], function ($, TrackManager
 		query.first({
 		  success: function(object) {
 		  	var votes=object.get(field);
-		    object.set(field, votes++ );
+		  	votes++;
+		  	console.log("Actual votes:",votes);
+		    object.set(field, votes);
 		    object.save();
 		  },
 		  error: function(error) {
@@ -99,7 +101,6 @@ define(['jquery', 'TrackManager', 'Echonest', 'View'], function ($, TrackManager
             data['artist'] = track.artists[0].name,
             data['track'] = track.name,
             data['musicBrainzId'] = musicBrainzId;
-            console.log("data", data);
           
           	var trackButtonName = $("<a>"+data['track']+"</a>");
             trackButtonName.click(function (e) { 
@@ -113,6 +114,7 @@ define(['jquery', 'TrackManager', 'Echonest', 'View'], function ($, TrackManager
             	voteSong(number); 
             });
             trackButton.append(trackButtonLink);
+            trackButton.append("<p><img width=100 src='"+track.image+"'/></p>");
 
 		   },
 		  error: function(error) {
