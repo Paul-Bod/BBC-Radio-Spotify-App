@@ -32,7 +32,13 @@ define(function () {
         normalizedData['name'] = data['artist']['name'];
         normalizedData['image'] = data['artist']['image']['src'];
         normalizedData['reviews'] = data['artist']['reviews'];
-        normalizedData['bio'] = data['artist']['wikipedia_article']['content'];
+
+        if (data['artist']['wikipedia_article']) { 
+            normalizedData['bio'] = data['artist']['wikipedia_article']['content'];
+        }
+        else {
+            normalizedData['bio'] = '';
+        }
 
         return normalizedData;
     }
@@ -67,7 +73,7 @@ define(function () {
         var normalizedData = {};
 
         console.log(data);
-        if (data) {
+        if (data['position']) {
 
             normalizedData['position'] = data['position'];
             normalizedData['lastweek'] = data['lastweek'];
