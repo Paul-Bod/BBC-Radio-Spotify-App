@@ -1,10 +1,9 @@
-define(['jquery'
-], function ($) {
+define(function () {
 
     var exports = {};
 
     exports.init = function () {
-
+    
 		Parse.initialize("qR0ieufBeZNS8uVptjl7CVEEj2gHPZAgxxpinlw8", "xkUCDRNqpML8Z75kMjO7o8q1TZqAINdPDBaoMjKL");
 	    
 	    var QuizObject = Parse.Object.extend("QuizObject");
@@ -25,9 +24,9 @@ define(['jquery'
 		      }
 	    });
 
-	}
+	};
 
-	exports.voteSong = function(numberSong){
+	function voteSong (numberSong){
 		var field = "votesForSong"+numberSong;
 		var QuizObject = Parse.Object.extend("QuizObject");
 		var query = new Parse.Query(QuizObject);
@@ -45,7 +44,7 @@ define(['jquery'
 		});
 	}
 
-	exports.renderQuizSongs = function(){
+	function renderQuizSongs (){
 		var field = "votesForSong"+numberSong;
 		var QuizObject = Parse.Object.extend("QuizObject");
 		var query = new Parse.Query(QuizObject);
@@ -59,9 +58,7 @@ define(['jquery'
 		    alert("Error: " + error.code + " " + error.message);
 		  }
 		});
-	}
+}
 
-
-
- return exports;
+    return exports;
 });
